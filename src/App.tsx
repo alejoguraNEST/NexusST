@@ -310,143 +310,41 @@ const CreatorsAndBrands = () => {
 };
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    interest: 'Gestión Deportiva',
-    message: ''
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio';
-    if (!formData.email.trim()) {
-      newErrors.email = 'El email es obligatorio';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'El formato del email no es válido';
-    }
-    if (!formData.message.trim()) newErrors.message = 'El mensaje no puede estar vacío';
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      setIsSubmitting(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        setFormData({ name: '', email: '', interest: 'Gestión Deportiva', message: '' });
-        setTimeout(() => setSubmitSuccess(false), 5000);
-      }, 1500);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
   return (
-    <section id="contacto" className="py-24 max-w-7xl mx-auto px-6">
-      <div className="glass rounded-[3rem] p-10 md:p-20 relative overflow-hidden">
+    <section id="contacto" className="py-24 max-w-7xl mx-auto px-6 text-center">
+      <div className="glass rounded-[3rem] p-10 md:p-20 relative overflow-hidden max-w-4xl mx-auto">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-nexus-green/5 rounded-full blur-[100px] -mr-40 -mt-40" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-nexus-green/5 rounded-full blur-[80px] -ml-20 -mb-20" />
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-8">¿Listo para el <br /><span className="text-nexus-green">Siguiente Nivel?</span></h2>
-            <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-md">
-              Hablemos sobre tu carrera o tu próximo proyecto comercial. Nuestro equipo de expertos está listo para asesorarte.
-            </p>
-            <div className="space-y-6 text-sm">
-              <a href="mailto:alejogura@nexuselitest.com" className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors cursor-pointer">
-                <div className="w-10 h-10 glass rounded-full flex items-center justify-center"><Mail size={18} /></div>
-                alejogura@nexuselitest.com
-              </a>
-              <div className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors cursor-pointer">
-                <div className="w-10 h-10 glass rounded-full flex items-center justify-center"><Linkedin size={18} /></div>
-                LinkedIn / NexusElite
+        <div className="relative z-10 flex flex-col items-center">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+            ¿Listo para el <br />
+            <span className="text-nexus-green">Siguiente Nivel?</span>
+          </h2>
+          <p className="text-gray-400 text-lg mb-12 leading-relaxed max-w-xl">
+            Hablemos sobre tu carrera o tu próximo proyecto comercial. Conéctate con nosotros en nuestras plataformas oficiales de contacto.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center w-full max-w-xl">
+            <a 
+              href="mailto:alejogura@nexuselitest.com" 
+              className="flex items-center gap-4 px-6 py-4 rounded-2xl glass w-full sm:w-auto hover:bg-white hover:text-nexus-black transition-all cursor-pointer border border-white/5 group text-left sm:text-center justify-start sm:justify-center text-sm font-medium"
+            >
+              <div className="w-10 h-10 rounded-full bg-nexus-green/10 text-nexus-green flex items-center justify-center group-hover:bg-nexus-black/5 group-hover:text-nexus-black transition-colors">
+                <Mail size={18} />
               </div>
+              <span className="text-gray-200 group-hover:text-nexus-black transition-colors">alejogura@nexuselitest.com</span>
+            </a>
+            
+            <div 
+              className="flex items-center gap-4 px-6 py-4 rounded-2xl glass w-full sm:w-auto hover:bg-white hover:text-nexus-black transition-all cursor-pointer border border-white/5 group text-left sm:text-center justify-start sm:justify-center text-sm font-medium"
+            >
+              <div className="w-10 h-10 rounded-full bg-nexus-green/10 text-nexus-green flex items-center justify-center group-hover:bg-nexus-black/5 group-hover:text-nexus-black transition-colors">
+                <Linkedin size={18} />
+              </div>
+              <span className="text-gray-200 group-hover:text-nexus-black transition-colors">LinkedIn / NexusElite</span>
             </div>
           </div>
-          
-          <form className="space-y-4" onSubmit={handleSubmit}>
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-               <div className="space-y-1">
-                 <input 
-                   name="name"
-                   type="text" 
-                   placeholder="Tu Nombre" 
-                   value={formData.name}
-                   onChange={handleChange}
-                   className={`w-full px-6 py-4 rounded-2xl glass border-none focus:ring-2 outline-none ${errors.name ? 'focus:ring-red-500' : 'focus:ring-nexus-green'}`} 
-                 />
-                 {errors.name && <p className="text-red-500 text-[10px] ml-4 font-bold uppercase tracking-wider">{errors.name}</p>}
-               </div>
-               <div className="space-y-1">
-                 <input 
-                   name="email"
-                   type="email" 
-                   placeholder="Email" 
-                   value={formData.email}
-                   onChange={handleChange}
-                   className={`w-full px-6 py-4 rounded-2xl glass border-none focus:ring-2 outline-none ${errors.email ? 'focus:ring-red-500' : 'focus:ring-nexus-green'}`} 
-                 />
-                 {errors.email && <p className="text-red-500 text-[10px] ml-4 font-bold uppercase tracking-wider">{errors.email}</p>}
-               </div>
-             </div>
-             <div className="space-y-1">
-               <select 
-                 name="interest"
-                 value={formData.interest}
-                 onChange={handleChange}
-                 className="w-full px-6 py-4 rounded-2xl glass border-none focus:ring-2 focus:ring-nexus-green outline-none appearance-none cursor-pointer"
-               >
-                 <option value="Gestión Deportiva" className="bg-nexus-black">Interés: Gestión Deportiva</option>
-                 <option value="gestión de imagen" className="bg-nexus-black">Interés: Gestión de imagen</option>
-                 <option value="Registro de obras" className="bg-nexus-black">Interés: Registro de obras</option>
-                 <option value="Asesoría Legal" className="bg-nexus-black">Interés: Asesoría Legal</option>
-                 <option value="Alianzas de Marca" className="bg-nexus-black">Interés: Alianzas de Marca</option>
-                 <option value="Otro" className="bg-nexus-black">Otro</option>
-               </select>
-             </div>
-             <div className="space-y-1">
-               <textarea 
-                 name="message"
-                 placeholder="Cuéntanos más sobre ti..." 
-                 rows={4} 
-                 value={formData.message}
-                 onChange={handleChange}
-                 className={`w-full px-6 py-4 rounded-2xl glass border-none focus:ring-2 outline-none resize-none ${errors.message ? 'focus:ring-red-500' : 'focus:ring-nexus-green'}`}
-               ></textarea>
-               {errors.message && <p className="text-red-500 text-[10px] ml-4 font-bold uppercase tracking-wider">{errors.message}</p>}
-             </div>
-             <button 
-               type="submit"
-               disabled={isSubmitting}
-               className={`w-full py-4 font-bold rounded-2xl transition-all shadow-xl ${isSubmitting ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-nexus-green text-nexus-black hover:bg-white shadow-nexus-green/10'}`}
-             >
-               {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
-             </button>
-             {submitSuccess && (
-               <motion.p 
-                 initial={{ opacity: 0 }}
-                 animate={{ opacity: 1 }}
-                 className="text-nexus-green text-center font-bold text-sm"
-               >
-                 ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
-               </motion.p>
-             )}
-          </form>
         </div>
       </div>
     </section>
