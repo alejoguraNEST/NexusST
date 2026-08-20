@@ -15,8 +15,11 @@ import {
   Twitter,
   Linkedin,
   Mail,
-  ArrowUpRight
+  ArrowUpRight,
+  Sparkles
 } from 'lucide-react';
+import { AthletesModal } from './components/AthletesModal';
+import { CreatorsModal } from './components/CreatorsModal';
 
 // --- Components ---
 
@@ -240,72 +243,154 @@ const Services = () => {
 };
 
 const CreatorsAndBrands = () => {
+  const [isAthletesModalOpen, setIsAthletesModalOpen] = useState(false);
+  const [isCreatorsModalOpen, setIsCreatorsModalOpen] = useState(false);
+
   return (
-    <section id="talento" className="py-24 bg-white/5 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1">
-          <div className="grid grid-cols-2 gap-4">
-             {/* Abstract visual representations using cards */}
-            <div className="space-y-4">
-              <div className="h-64 glass rounded-2xl overflow-hidden relative group">
-                <div className="absolute inset-0 bg-gradient-to-t from-nexus-black to-transparent z-10" />
-                <div className="absolute bottom-4 left-4 z-20">
-                  <Camera size={16} className="text-nexus-green mb-1" />
-                  <p className="text-[10px] font-bold uppercase tracking-widest">Creators</p>
+    <>
+      <section id="talento" className="py-24 bg-white/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="order-2 lg:order-1">
+            <div className="grid grid-cols-2 gap-4">
+              {/* Creators & Media Card */}
+              <div className="space-y-4">
+                <div 
+                  onClick={() => setIsCreatorsModalOpen(true)}
+                  className="h-64 glass rounded-2xl overflow-hidden relative group cursor-pointer border border-nexus-green/30 hover:border-nexus-green transition-all shadow-xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-nexus-black via-nexus-black/40 to-transparent z-10" />
+                  
+                  {/* Top Badge */}
+                  <div className="absolute top-3 left-3 z-20 bg-nexus-green text-nexus-black px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-md">
+                    <Sparkles size={10} />
+                    <span>Ver Creadores</span>
+                  </div>
+
+                  {/* Card Bottom Details */}
+                  <div className="absolute bottom-3 left-3 right-3 z-20">
+                    <div className="flex items-center gap-1 text-nexus-green mb-0.5">
+                      <Camera size={14} />
+                      <p className="text-[10px] font-extrabold uppercase tracking-widest">Creators & Media</p>
+                    </div>
+                    <p className="text-sm font-bold text-white leading-tight">Esteban Macías & MÁS</p>
+                    <p className="text-[11px] text-gray-300 font-medium">Lifestyle • Fitness • Media</p>
+                  </div>
+
+                  <img 
+                    src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&q=80&w=800"
+                    alt="Esteban Macías - Creators and Digital Media Nexus"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" 
+                  />
                 </div>
-                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?auto=format&fit=crop&q=80&w=800')] bg-cover bg-center group-hover:scale-110 transition-transform duration-700" />
-              </div>
-              <div className="h-40 glass rounded-2xl bg-nexus-green/5 border-nexus-green/20 flex items-center justify-center p-8">
-                <span className="text-xs font-medium text-center text-gray-400">Impulsamos tu presencia digital hacia el siguiente nivel comercial.</span>
-              </div>
-            </div>
-            <div className="space-y-4 pt-12">
-               <div className="h-40 glass rounded-2xl flex flex-col items-center justify-center p-6 text-center">
-                 <Users className="text-nexus-green mb-2" size={24} />
-                 <h4 className="font-bold text-lg">+100M</h4>
-                 <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Alcance Combinado</p>
-               </div>
-               <div className="h-64 glass rounded-2xl overflow-hidden relative group">
-                <div className="absolute inset-0 bg-gradient-to-t from-nexus-black to-transparent z-10" />
-                <div className="absolute bottom-4 left-4 z-20">
-                  <Trophy size={16} className="text-nexus-green mb-1" />
-                  <p className="text-[10px] font-bold uppercase tracking-widest">Athletes</p>
+
+                <div className="h-40 glass rounded-2xl bg-nexus-green/5 border-nexus-green/20 flex items-center justify-center p-6 text-center">
+                  <span className="text-xs font-medium text-gray-300">Impulsamos tu presencia digital y alianzas comerciales con las mejores marcas.</span>
                 </div>
-                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1541252260733-5433d3e74efc?auto=format&fit=crop&q=80&w=800')] bg-cover bg-center group-hover:scale-110 transition-transform duration-700" />
+              </div>
+
+              <div className="space-y-4 pt-12">
+                 <div className="h-40 glass rounded-2xl flex flex-col items-center justify-center p-6 text-center border border-white/10">
+                   <Users className="text-nexus-green mb-2" size={24} />
+                   <h4 className="font-bold text-lg text-white">+100M</h4>
+                   <p className="text-[10px] text-gray-400 uppercase tracking-tighter">Alcance Combinado</p>
+                 </div>
+                 
+                 {/* Athletes Card featuring Ofelia Chavez */}
+                 <div 
+                   onClick={() => setIsAthletesModalOpen(true)}
+                   className="h-64 glass rounded-2xl overflow-hidden relative group cursor-pointer border border-nexus-green/30 hover:border-nexus-green transition-all shadow-xl"
+                 >
+                  <div className="absolute inset-0 bg-gradient-to-t from-nexus-black via-nexus-black/40 to-transparent z-10" />
+                  
+                  {/* Top Badge */}
+                  <div className="absolute top-3 left-3 z-20 bg-nexus-green text-nexus-black px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-md">
+                    <Sparkles size={10} />
+                    <span>Ver Atletas</span>
+                  </div>
+
+                  {/* Card Bottom Details */}
+                  <div className="absolute bottom-3 left-3 right-3 z-20">
+                    <div className="flex items-center gap-1 text-nexus-green mb-0.5">
+                      <Trophy size={14} />
+                      <p className="text-[10px] font-extrabold uppercase tracking-widest">Athletes</p>
+                    </div>
+                    <p className="text-sm font-bold text-white leading-tight">Ofelia Chávez</p>
+                    <p className="text-[11px] text-gray-300 font-medium">Futbolista • Liga Femenil BBVA</p>
+                  </div>
+
+                  <img 
+                    src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=800" 
+                    alt="Ofelia Chávez - Futbolista Liga Femenil BBVA"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" 
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div className="order-1 lg:order-2">
-          <span className="text-nexus-green font-bold text-xs uppercase tracking-widest mb-4 block">Ecosistema Digital</span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight italic">Contenido que transforma <span className="text-gradient">Marcas</span></h2>
-          <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-            Nuestros creadores de contenido y artistas no solo generan vistas; generan cultura. Conectamos el talento con las marcas más grandes del mundo a través de alianzas estratégicas genuinas.
-          </p>
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-nexus-green/20 flex items-center justify-center text-nexus-green mt-1">
-                <ChevronRight size={16} />
+          
+          <div className="order-1 lg:order-2">
+            <span className="text-nexus-green font-bold text-xs uppercase tracking-widest mb-4 block">Ecosistema Digital & Deportivo</span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight italic">Talento que transforma <span className="text-gradient">Marcas</span></h2>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Representamos atletas de élite y creadores de contenido que inspiran a millones. Como nuestra atleta de fútbol profesional <strong className="text-white">Ofelia Chávez</strong> en la <strong className="text-nexus-green">Liga Femenil BBVA</strong> y nuestro roster de <strong className="text-white">Creadores y Medios Digitales</strong>, conectamos el talento con las principales marcas del mundo.
+            </p>
+
+            <div className="space-y-6 mb-8">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-nexus-green/20 flex items-center justify-center text-nexus-green mt-1 shrink-0">
+                  <ChevronRight size={16} />
+                </div>
+                <div>
+                  <h4 className="font-bold mb-1 underline decoration-nexus-green/30 decoration-2 underline-offset-4">Gestión & Representación Deportiva</h4>
+                  <p className="text-sm text-gray-500">Acompañamiento profesional en negociaciones de contratos, marcas y patrocinios.</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold mb-1 underline decoration-nexus-green/30 decoration-2 underline-offset-4">Colaboraciones de Marca</h4>
-                <p className="text-sm text-gray-500">Diseñamos campañas que impactan y escalan el reconocimiento de marca.</p>
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-nexus-green/20 flex items-center justify-center text-nexus-green mt-1 shrink-0">
+                  <ChevronRight size={16} />
+                </div>
+                <div>
+                  <h4 className="font-bold mb-1 underline decoration-nexus-green/30 decoration-2 underline-offset-4">Colaboraciones & Estrategia Digital</h4>
+                  <p className="text-sm text-gray-500">Campañas transmedia de alto alcance para creadores, podcasters y medios.</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-nexus-green/20 flex items-center justify-center text-nexus-green mt-1">
+
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={() => setIsAthletesModalOpen(true)}
+                className="px-6 py-3.5 bg-nexus-green text-nexus-black font-extrabold text-xs rounded-full hover:bg-white hover:scale-105 transition-all flex items-center gap-2.5 shadow-lg shadow-nexus-green/20 cursor-pointer"
+              >
+                <Trophy size={16} />
+                <span>Roster de Atletas</span>
                 <ChevronRight size={16} />
-              </div>
-              <div>
-                <h4 className="font-bold mb-1 underline decoration-nexus-green/30 decoration-2 underline-offset-4">Gestión de Medios</h4>
-                <p className="text-sm text-gray-500">Protección legal y comercial de tus derechos de imagen y contenido.</p>
-              </div>
+              </button>
+
+              <button
+                onClick={() => setIsCreatorsModalOpen(true)}
+                className="px-6 py-3.5 glass text-white font-extrabold text-xs rounded-full hover:bg-white/10 hover:scale-105 transition-all flex items-center gap-2.5 border border-white/10 cursor-pointer"
+              >
+                <Camera size={16} className="text-nexus-green" />
+                <span>Creators & Media</span>
+                <ChevronRight size={16} />
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <AthletesModal 
+        isOpen={isAthletesModalOpen} 
+        onClose={() => setIsAthletesModalOpen(false)} 
+      />
+
+      <CreatorsModal 
+        isOpen={isCreatorsModalOpen} 
+        onClose={() => setIsCreatorsModalOpen(false)} 
+      />
+    </>
   );
 };
 
