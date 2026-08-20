@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Trophy, Award, Search, Sparkles, ChevronRight, Upload, CheckCircle2 } from 'lucide-react';
+import { X, Trophy, Award, Search, Sparkles, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { ATHLETES_DATA, Athlete } from '../data/athletes';
 
 interface AthletesModalProps {
@@ -12,7 +12,6 @@ export const AthletesModal: React.FC<AthletesModalProps> = ({ isOpen, onClose })
   const [filter, setFilter] = useState<'todos' | 'femenil' | 'varonil' | 'otros'>('todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAthlete, setSelectedAthlete] = useState<Athlete | null>(ATHLETES_DATA[0]);
-  const [customImage, setCustomImage] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -24,17 +23,6 @@ export const AthletesModal: React.FC<AthletesModalProps> = ({ isOpen, onClose })
       athlete.league.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCustomImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   return (
     <AnimatePresence>
@@ -124,12 +112,11 @@ export const AthletesModal: React.FC<AthletesModalProps> = ({ isOpen, onClose })
                   <div className="md:col-span-5 relative group">
                     <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 bg-nexus-black relative shadow-2xl">
                       <img
-                        src={selectedAthlete.id === 'ofelia-chavez' && customImage ? customImage : selectedAthlete.image}
+                        src={selectedAthlete.image}
                         alt={selectedAthlete.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
-                          // Fallback placeholder image if URL fails
                           e.currentTarget.src = 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=800';
                         }}
                       />
@@ -143,19 +130,6 @@ export const AthletesModal: React.FC<AthletesModalProps> = ({ isOpen, onClose })
                         <p className="text-xs text-nexus-green font-medium">{selectedAthlete.role}</p>
                       </div>
                     </div>
-
-                    {selectedAthlete.id === 'ofelia-chavez' && (
-                      <label className="mt-3 flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-medium glass rounded-xl text-gray-400 hover:text-white cursor-pointer transition-colors border border-white/10">
-                        <Upload size={14} className="text-nexus-green" />
-                        <span>{customImage ? 'Cambiar foto de Ofelia' : 'Subir foto personalizada'}</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageUpload}
-                          className="hidden"
-                        />
-                      </label>
-                    )}
                   </div>
 
                   {/* Info Column */}
@@ -246,7 +220,7 @@ export const AthletesModal: React.FC<AthletesModalProps> = ({ isOpen, onClose })
                   >
                     <div className="aspect-[4/5] relative overflow-hidden bg-nexus-black">
                       <img
-                        src={athlete.id === 'ofelia-chavez' && customImage ? customImage : athlete.image}
+                        src={athlete.image}
                         alt={athlete.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"

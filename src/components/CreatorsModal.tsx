@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Camera, Award, Search, Sparkles, ChevronRight, Upload, CheckCircle2, Video } from 'lucide-react';
+import { X, Camera, Award, Search, Sparkles, ChevronRight, CheckCircle2, Video } from 'lucide-react';
 import { CREATORS_DATA, Creator } from '../data/creators';
 
 interface CreatorsModalProps {
@@ -12,7 +12,6 @@ export const CreatorsModal: React.FC<CreatorsModalProps> = ({ isOpen, onClose })
   const [filter, setFilter] = useState<'todos' | 'lifestyle' | 'gaming' | 'sports' | 'media'>('todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCreator, setSelectedCreator] = useState<Creator | null>(CREATORS_DATA[0]);
-  const [customImages, setCustomImages] = useState<Record<string, string>>({});
 
   if (!isOpen) return null;
 
@@ -24,20 +23,6 @@ export const CreatorsModal: React.FC<CreatorsModalProps> = ({ isOpen, onClose })
       creator.platform.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && selectedCreator) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCustomImages((prev) => ({
-          ...prev,
-          [selectedCreator.id]: reader.result as string
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   return (
     <AnimatePresence>
@@ -128,12 +113,12 @@ export const CreatorsModal: React.FC<CreatorsModalProps> = ({ isOpen, onClose })
                   <div className="md:col-span-5 relative group">
                     <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 bg-nexus-black relative shadow-2xl">
                       <img
-                        src={customImages[selectedCreator.id] || selectedCreator.image}
+                        src={selectedCreator.image}
                         alt={selectedCreator.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
-                          e.currentTarget.src = 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800';
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&q=80&w=800';
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-nexus-black/90 via-transparent to-transparent" />
@@ -146,17 +131,6 @@ export const CreatorsModal: React.FC<CreatorsModalProps> = ({ isOpen, onClose })
                         <p className="text-xs text-nexus-green font-medium">{selectedCreator.role}</p>
                       </div>
                     </div>
-
-                    <label className="mt-3 flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-medium glass rounded-xl text-gray-400 hover:text-white cursor-pointer transition-colors border border-white/10">
-                      <Upload size={14} className="text-nexus-green" />
-                      <span>{customImages[selectedCreator.id] ? 'Cambiar foto de ' + selectedCreator.name : 'Subir foto personalizada'}</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                      />
-                    </label>
                   </div>
 
                   {/* Info Column */}
@@ -248,12 +222,12 @@ export const CreatorsModal: React.FC<CreatorsModalProps> = ({ isOpen, onClose })
                   >
                     <div className="aspect-[4/5] relative overflow-hidden bg-nexus-black">
                       <img
-                        src={customImages[creator.id] || creator.image}
+                        src={creator.image}
                         alt={creator.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
-                          e.currentTarget.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800';
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&q=80&w=800';
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-nexus-black via-nexus-black/20 to-transparent" />
