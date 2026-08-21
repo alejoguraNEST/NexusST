@@ -277,7 +277,7 @@ const CreatorsAndBrands = () => {
                   </div>
 
                   <img 
-                    src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&q=80&w=800"
+                    src="/Esteban.png"
                     alt="Esteban Macías - Creators and Digital Media Nexus"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" 
@@ -320,7 +320,7 @@ const CreatorsAndBrands = () => {
                   </div>
 
                   <img 
-                    src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=800" 
+                    src="/Ofelia.png" 
                     alt="Ofelia Chávez - Futbolista Liga Femenil BBVA"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" 

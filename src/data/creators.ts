@@ -20,7 +20,7 @@ export const CREATORS_DATA: Creator[] = [
     platform: 'Instagram / TikTok',
     handle: '@esteban_mcfree',
     category: 'lifestyle',
-    image: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&q=80&w=1000',
+    image: '/Esteban.png',
     featured: true,
     bio: 'Creador de contenido enfocado en estilo de vida activo, fitness, bienestar físico y mental, y alianzas de marca en el segmento wellness & salud.',
     achievements: [
@@ -41,7 +41,7 @@ export const CREATORS_DATA: Creator[] = [
     platform: 'Instagram / TikTok',
     handle: '@carlo.villain',
     category: 'lifestyle',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800',
+    image: '/Lechuga.png',
     bio: 'Talento multidisciplinario con destacada trayectoria en modelaje, preparación física como fit coach, artes escénicas y danza, colaborando con marcas de estilo de vida, fitness y producciones audiovisuales.',
     achievements: [
       'Modelo en Pasarelas y Campañas Comerciales de Moda',
